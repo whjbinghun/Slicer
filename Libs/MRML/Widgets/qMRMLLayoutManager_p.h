@@ -155,7 +155,7 @@ protected:
   void showWidget(QWidget* widget);
 };
 
-//------------------------------------------------------------------------------
+//---------3D---------------------------------------------------------------------
 class QMRML_WIDGETS_EXPORT qMRMLLayoutThreeDViewFactory
   : public qMRMLLayoutViewFactory
 {
@@ -198,7 +198,7 @@ protected:
 };
 #endif
 
-//------------------------------------------------------------------------------
+//-------表-----------------------------------------------------------------------
 class QMRML_WIDGETS_EXPORT qMRMLLayoutTableViewFactory
   : public qMRMLLayoutViewFactory
 {
@@ -213,7 +213,7 @@ protected:
   QWidget* createViewFromNode(vtkMRMLAbstractViewNode* viewNode) override;
 };
 
-//------------------------------------------------------------------------------
+//-----情节-------------------------------------------------------------------------
 class QMRML_WIDGETS_EXPORT qMRMLLayoutPlotViewFactory
   : public qMRMLLayoutViewFactory
 {

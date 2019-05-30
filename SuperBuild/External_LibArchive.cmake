@@ -33,7 +33,8 @@ if((NOT DEFINED LibArchive_INCLUDE_DIR
   # CMake arguments specific to LibArchive >= 2.8.4
   list(APPEND EXTERNAL_PROJECT_OPTIONAL_CMAKE_CACHE_ARGS
     -DBUILD_TESTING:BOOL=OFF
-    -DENABLE_OPENSSL:BOOL=OFF
+    -DENABLE_OPENSSL:BOOL=OFF 
+    -DCMAKE_BUILD_TYPE:STRING=Release
     )
 
   ExternalProject_SetIfNotDefined(

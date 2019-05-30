@@ -938,7 +938,7 @@ void qSlicerMainWindow::on_SDBSaveToDCMAction_triggered()
   // NOT IMPLEMENTED YET
 }
 
-//---------------------------------------------------------------------------
+//---------close scene------------------------------------------------------------------
 void qSlicerMainWindow::on_FileCloseSceneAction_triggered()
 {
   Q_D(qSlicerMainWindow);
@@ -1292,6 +1292,7 @@ void qSlicerMainWindow::setupMenuActions()
 //---------------------------------------------------------------------------
 void qSlicerMainWindow::on_LoadDICOMAction_triggered()
 {
+  qDebug()<<"qSlicerMainWindow::on_LoadDICOMAction_triggered";
   qSlicerLayoutManager * layoutManager = qSlicerApplication::application()->layoutManager();
 
   if (!layoutManager)
@@ -1326,7 +1327,7 @@ void qSlicerMainWindow::on_EditApplicationSettingsAction_triggered()
   settingsDialog->exec();
 }
 
-//---------------------------------------------------------------------------
+//--------------加载新文件属性-------------------------------------------------------------
 void qSlicerMainWindow::onNewFileLoaded(const qSlicerIO::IOProperties& fileProperties)
 {
   Q_D(qSlicerMainWindow);
@@ -1341,12 +1342,14 @@ void qSlicerMainWindow::onNewFileLoaded(const qSlicerIO::IOProperties& filePrope
 
   // Keep the settings up-to-date
   qSlicerMainWindowPrivate::writeRecentlyLoadedFiles(d->RecentlyLoadedFileProperties);
+
+  qDebug()<<"qSlicerMainWindow::onNewFileLoaded"<<fileProperties;
 }
 
-//---------------------------------------------------------------------------
+//---------拷贝------------------------------------------------------------------
 void qSlicerMainWindow::on_CopyAction_triggered()
 {
-  QWidget* focused = QApplication::focusWidget();
+  QWidget* focused = QApplication::focusWidget();//当前焦点所在窗口
   if (focused != nullptr)
     {
     QApplication::postEvent(focused,
@@ -1360,7 +1363,7 @@ void qSlicerMainWindow::on_CopyAction_triggered()
     }
 }
 
-//---------------------------------------------------------------------------
+//-----------粘贴----------------------------------------------------------------
 void qSlicerMainWindow::on_PasteAction_triggered()
 {
   QWidget* focused = QApplication::focusWidget();
@@ -1377,7 +1380,7 @@ void qSlicerMainWindow::on_PasteAction_triggered()
     }
 }
 
-//---------------------------------------------------------------------------
+//-----------剪切----------------------------------------------------------------
 void qSlicerMainWindow::on_CutAction_triggered()
 {
   QWidget* focused = QApplication::focusWidget();

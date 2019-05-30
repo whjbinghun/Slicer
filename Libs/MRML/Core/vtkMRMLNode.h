@@ -271,7 +271,7 @@ public:
     this->SetDisableModifiedEvent(previousDisableModifiedEventState);
     if (!previousDisableModifiedEventState)
       {
-      return this->InvokePendingModifiedEvent();
+      return this->InvokePendingModifiedEvent();//调用挂起的被修改事件
       }
     return this->ModifiedEventPending;
     };

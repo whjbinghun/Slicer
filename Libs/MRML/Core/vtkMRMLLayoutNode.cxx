@@ -177,7 +177,7 @@ void vtkMRMLLayoutNode::ReadXMLAttributes(const char** atts)
   this->EndModify(disabledModify);
 }
 
-//----------------------------------------------------------------------------
+//--------设置视图布局--------------------------------------------------------------------
 void vtkMRMLLayoutNode::SetViewArrangement(int arrNew)
 {
   // if the view arrangement definition has not been changed, return
@@ -235,14 +235,14 @@ bool vtkMRMLLayoutNode::SetLayoutDescription(int layout, const char* layoutDescr
   return true;
 }
 
-//----------------------------------------------------------------------------
+//--------判断该布局是否存在--------------------------------------------------------------------
 bool vtkMRMLLayoutNode::IsLayoutDescription(int layout)
 {
   std::map<int, std::string>::const_iterator it = this->Layouts.find(layout);
   return it != this->Layouts.end();
 }
 
-//----------------------------------------------------------------------------
+//------------------获取布局描述----------------------------------------------------------
 std::string vtkMRMLLayoutNode::GetLayoutDescription(int layout)
 {
   std::map<int, std::string>::const_iterator it = this->Layouts.find(layout);
@@ -254,7 +254,7 @@ std::string vtkMRMLLayoutNode::GetLayoutDescription(int layout)
   return it->second;
 }
 
-//----------------------------------------------------------------------------
+//------------更新当前布局----------------------------------------------------------------
 void vtkMRMLLayoutNode::UpdateCurrentLayoutDescription()
 {
   if (this->GetViewArrangement() == vtkMRMLLayoutNode::SlicerLayoutCustomView)
@@ -289,7 +289,7 @@ void vtkMRMLLayoutNode::SetAndParseCurrentLayoutDescription(const char* descript
   this->SetCurrentLayoutDescription(description);
 }
 
-//----------------------------------------------------------------------------
+//--------------解析布局--------------------------------------------------------------
 vtkXMLDataElement* vtkMRMLLayoutNode::ParseLayout(const char* description)
 {
   if (!description || strlen(description) <= 0)

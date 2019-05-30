@@ -65,7 +65,7 @@
 qMRMLLayoutThreeDViewFactory::qMRMLLayoutThreeDViewFactory(QObject* parent)
   : qMRMLLayoutViewFactory(parent)
 {
-  this->ViewLogics = vtkCollection::New();
+  this->ViewLogics = vtkCollection::New();//逻辑集合
 }
 
 //------------------------------------------------------------------------------
@@ -128,7 +128,7 @@ QWidget* qMRMLLayoutThreeDViewFactory::createViewFromNode(vtkMRMLAbstractViewNod
   // There must be a unique ThreeDWidget per node
   Q_ASSERT(!this->viewWidget(viewNode));
 
-  qMRMLThreeDWidget* threeDWidget = new qMRMLThreeDWidget(this->layoutManager()->viewport());
+  qMRMLThreeDWidget* threeDWidget = new qMRMLThreeDWidget(this->layoutManager()->viewport());//new 3D widget
   threeDWidget->setObjectName(QString("ThreeDWidget%1").arg(viewNode->GetLayoutLabel()));
   threeDWidget->setViewLabel(viewNode->GetLayoutLabel());
   QColor layoutColor = QColor::fromRgbF(viewNode->GetLayoutColor()[0],
@@ -204,7 +204,7 @@ QWidget* qMRMLLayoutChartViewFactory::createViewFromNode(vtkMRMLAbstractViewNode
   // There must be a unique ChartWidget per node
   Q_ASSERT(!this->viewWidget(viewNode));
 
-  qMRMLChartWidget* chartWidget = new qMRMLChartWidget(this->layoutManager()->viewport());
+  qMRMLChartWidget* chartWidget = new qMRMLChartWidget(this->layoutManager()->viewport());//new chart widget
   QString layoutName(viewNode->GetLayoutName());
   chartWidget->setObjectName(QString("qMRMLChartWidget" + layoutName));
   chartWidget->setViewLabel(viewNode->GetLayoutLabel());
@@ -244,7 +244,7 @@ QWidget* qMRMLLayoutTableViewFactory::createViewFromNode(vtkMRMLAbstractViewNode
   // There must be a unique TableWidget per node
   Q_ASSERT(!this->viewWidget(viewNode));
 
-  qMRMLTableWidget* tableWidget = new qMRMLTableWidget(this->layoutManager()->viewport());
+  qMRMLTableWidget* tableWidget = new qMRMLTableWidget(this->layoutManager()->viewport());//new table widget
   QString layoutName(viewNode->GetLayoutName());
   tableWidget->setObjectName(QString("qMRMLTableWidget" + layoutName));
   tableWidget->setViewLabel(viewNode->GetLayoutLabel());
@@ -282,7 +282,7 @@ QWidget* qMRMLLayoutPlotViewFactory::createViewFromNode(vtkMRMLAbstractViewNode*
   // There must be a unique plot widget per node
   Q_ASSERT(!this->viewWidget(viewNode));
 
-  qMRMLPlotWidget* plotWidget = new qMRMLPlotWidget(this->layoutManager()->viewport());
+  qMRMLPlotWidget* plotWidget = new qMRMLPlotWidget(this->layoutManager()->viewport());//new 
   QString layoutName(viewNode->GetLayoutName());
   plotWidget->setObjectName(QString("qMRMLPlotWidget" + layoutName));
   plotWidget->setViewLabel(viewNode->GetLayoutLabel());
@@ -365,8 +365,8 @@ QWidget* qMRMLLayoutSliceViewFactory::createViewFromNode(vtkMRMLAbstractViewNode
   // there is a unique slice widget per node
   Q_ASSERT(!this->viewWidget(viewNode));
 
-  qMRMLSliceWidget * sliceWidget = new qMRMLSliceWidget(this->layoutManager()->viewport());
-  sliceWidget->sliceController()->setControllerButtonGroup(this->SliceControllerButtonGroup);
+  qMRMLSliceWidget * sliceWidget = new qMRMLSliceWidget(this->layoutManager()->viewport());// new qMRMLSliceWidget
+  sliceWidget->sliceController()->setControllerButtonGroup(this->SliceControllerButtonGroup);//设置控制台按钮组
   QString sliceLayoutName(viewNode->GetLayoutName());
   QString sliceViewLabel(viewNode->GetLayoutLabel());
   vtkMRMLSliceNode* sliceNode = vtkMRMLSliceNode::SafeDownCast(viewNode);
@@ -428,7 +428,7 @@ qMRMLLayoutManagerPrivate::~qMRMLLayoutManagerPrivate()
   this->MRMLLayoutLogic = nullptr;
 }
 
-//------------------------------------------------------------------------------
+//---------初始化 所有工厂类---------------------------------------------------------------------
 void qMRMLLayoutManagerPrivate::init()
 {
   Q_Q(qMRMLLayoutManager);
@@ -1319,7 +1319,7 @@ int qMRMLLayoutManager::layout()const
     d->MRMLLayoutNode->GetViewArrangement() : vtkMRMLLayoutNode::SlicerLayoutNone;
 }
 
-//------------------------------------------------------------------------------
+//-------设置布局-----------------------------------------------------------------------
 void qMRMLLayoutManager::setLayout(int layout)
 {
   Q_D(qMRMLLayoutManager);

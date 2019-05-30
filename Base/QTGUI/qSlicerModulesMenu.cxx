@@ -642,6 +642,7 @@ bool qSlicerModulesMenu::removeModule(qSlicerAbstractCoreModule* moduleToRemove,
 //---------------------------------------------------------------------------
 void qSlicerModulesMenu::setCurrentModule(const QString& moduleName)
 {
+  qDebug()<<"qSlicerModulesMenu::setCurrentModule 11111"<<moduleName;
   Q_D(qSlicerModulesMenu);
   // It's faster to look for the action in the AllModulesMenu (no need to
   // do a recursive search
@@ -656,6 +657,7 @@ void qSlicerModulesMenu::setCurrentModule(const QString& moduleName)
     }
   // triggering the action will eventually call actionSelected();
   moduleAction->trigger();
+   qDebug()<<"qSlicerModulesMenu::setCurrentModule 2222"<<moduleAction;
 }
 
 //---------------------------------------------------------------------------

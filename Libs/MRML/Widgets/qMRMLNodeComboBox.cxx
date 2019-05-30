@@ -237,7 +237,7 @@ void qMRMLNodeComboBoxPrivate::updateNoneItem(bool resetRootIndex)
 */
 }
 
-// --------------------------------------------------------------------------
+// -----------更新Action单元---------------------------------------------------------------
 void qMRMLNodeComboBoxPrivate::updateActionItems(bool resetRootIndex)
 {
   Q_Q(qMRMLNodeComboBox);
@@ -1198,7 +1198,7 @@ void qMRMLNodeComboBox::changeEvent(QEvent *event)
   this->Superclass::changeEvent(event);
 }
 
-// --------------------------------------------------------------------------
+// ---------新增菜单单元-----------------------------------------------------------------
 void qMRMLNodeComboBox::addMenuAction(QAction *newAction)
 {
   Q_D(qMRMLNodeComboBox);

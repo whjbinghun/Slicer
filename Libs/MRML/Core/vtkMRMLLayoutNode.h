@@ -147,7 +147,7 @@ public:
   // ViewArrangement which is the integer identifier for the
   // layout. ViewArrangement and CurrentViewDescription may not
   // correspond while a view is being switched.
-  vtkGetStringMacro(CurrentLayoutDescription);
+  vtkGetStringMacro(CurrentLayoutDescription);//获取当前布局描述
 
   // Get the XML data model of the CurrentViewDescription
   vtkGetObjectMacro(LayoutRootElement, vtkXMLDataElement);
@@ -158,7 +158,7 @@ public:
 protected:
   void UpdateCurrentLayoutDescription();
   void SetAndParseCurrentLayoutDescription(const char* description);
-  vtkSetStringMacro(CurrentLayoutDescription);
+  vtkSetStringMacro(CurrentLayoutDescription);//设置当前布局描述
 
 protected:
   vtkMRMLLayoutNode();
@@ -182,7 +182,7 @@ protected:
   int SecondaryPanelSize;
 
   std::map<int, std::string> Layouts;
-  char*                      CurrentLayoutDescription;
+  char*                      CurrentLayoutDescription;//当前布局描述
   vtkXMLDataElement*         LayoutRootElement;
 };
 

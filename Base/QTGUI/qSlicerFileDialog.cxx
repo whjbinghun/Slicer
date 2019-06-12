@@ -267,6 +267,8 @@ qSlicerIOOptions* qSlicerStandardFileDialog
 //-----------------------------------------------------------------------------
 bool qSlicerStandardFileDialog::exec(const qSlicerIO::IOProperties& ioProperties)
 {
+  qDebug()<<"qSlicerStandardFileDialog::exec write "<<this->fileType()<<ioProperties;
+
   Q_D(qSlicerStandardFileDialog);
   Q_ASSERT(!ioProperties.contains("fileName"));
 
@@ -289,6 +291,8 @@ bool qSlicerStandardFileDialog::exec(const qSlicerIO::IOProperties& ioProperties
   // options is not necessary a qSlicerIOOptionsWidget (for the case of
   // readers/modules with no UI. If there is a UI then add it inside the  file
   // dialog.
+    qDebug()<<"qSlicerStandardFileDialog::exec write 222222"<<fileDialog<<options<<optionsWidget;
+
   if (optionsWidget)
     {
     // fileDialog will reparent optionsWidget and take care of deleting
@@ -306,47 +310,51 @@ bool qSlicerStandardFileDialog::exec(const qSlicerIO::IOProperties& ioProperties
     fileDialog->selectFile(ioProperties["defaultFileName"].toString());
     }
 
+  qDebug()<<"qSlicerStandardFileDialog::exec write 333333"<<this->fileType()<<properties;
+
+
   // we do not delete options now as it is still useful later (even if there is
   // no UI.) they are the options of the reader, UI or not.
   bool res = fileDialog->exec();
   if (res)
-    {
+  {
     QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
     properties = ioProperties;
     if (options)
-      {
+    {
       properties.unite(options->properties());
-      }
+    }
     else
-      {
+    {
       properties["fileName"] = fileDialog->selectedFiles();
-      }
+    }
+
     if (d->Action == qSlicerFileDialog::Read)
-      {
+    {
       vtkNew<vtkCollection> loadedNodes;
       ioManager->loadNodes(this->fileType(), properties, loadedNodes.GetPointer());
       for (int i = 0; i < loadedNodes->GetNumberOfItems();++i)
-        {
+      {
         vtkMRMLNode* node = vtkMRMLNode::SafeDownCast(loadedNodes->GetItemAsObject(i));
         if (node)
-          {
+        {
           d->LoadedNodes << node->GetID();
-          }
         }
+      }
       res = !d->LoadedNodes.isEmpty();
-      }
-    else if(d->Action == qSlicerFileDialog::Write)
-      {
-      res = ioManager->saveNodes(this->fileType(), properties);
-      }
-    else
-      {
-      res = false;
-      Q_ASSERT(d->Action == qSlicerFileDialog::Read ||
-               d->Action == qSlicerFileDialog::Write);
-      }
-    QApplication::restoreOverrideCursor();
     }
+    else if(d->Action == qSlicerFileDialog::Write)
+    {
+      res = ioManager->saveNodes(this->fileType(), properties);
+      qDebug()<<"qSlicerStandardFileDialog::exec write"<<this->fileType()<<properties<<res;
+    }
+    else
+    {
+      res = false;
+      Q_ASSERT(d->Action == qSlicerFileDialog::Read || d->Action == qSlicerFileDialog::Write);
+    }
+    QApplication::restoreOverrideCursor();
+  }
 
   ioManager->setFavorites(fileDialog->sidebarUrls());
 
@@ -354,10 +362,10 @@ bool qSlicerStandardFileDialog::exec(const qSlicerIO::IOProperties& ioProperties
   // deleting options. If it is, then fileDialog would have reparent
   // the options and take care of its destruction
   if (!optionsWidget)
-    {
+  {
     delete options;
     options = nullptr;
-    }
+  }
 
   delete fileDialog;
   return res;

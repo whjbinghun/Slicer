@@ -227,7 +227,7 @@ bool qSlicerIOManager::openAddSceneDialog()
   return this->openDialog(QString("SceneFile"), qSlicerFileDialog::Read, properties);
 }
 
-//-----------------------------------------------------------------------------
+//-------打开对话框----------------------------------------------------------------------
 bool qSlicerIOManager::openDialog(qSlicerIO::IOFileType fileType,
                                   qSlicerFileDialog::IOAction action,
                                   qSlicerIO::IOProperties properties,
@@ -236,36 +236,43 @@ bool qSlicerIOManager::openDialog(qSlicerIO::IOFileType fileType,
   Q_D(qSlicerIOManager);
   bool deleteDialog = false;
   if (properties["objectName"].toString().isEmpty())
-    {
+  {
     QString name = d->createUniqueDialogName(fileType, action, properties);
     properties["objectName"] = name;
-    }
+  
+    qDebug()<<"qSlicerIOManager::openDialog1111"<<fileType<<action<<properties<<name;
+  }
+
   qSlicerFileDialog* dialog = d->findDialog(fileType, action);
+  qDebug()<<"qSlicerIOManager::openDialog22222"<<dialog;
+
   if (dialog == nullptr)
-    {
+  {
     deleteDialog = true;
-    qSlicerStandardFileDialog* standardDialog =
-      new qSlicerStandardFileDialog(this);
+    qSlicerStandardFileDialog* standardDialog = new qSlicerStandardFileDialog(this);
     standardDialog->setFileType(fileType);
     standardDialog->setAction(action);
     dialog = standardDialog;
-    }
+
+  }
   bool res = dialog->exec(properties);
+
+
   if (loadedNodes)
-    {
+  {
     foreach(const QString& nodeID, dialog->loadedNodes())
-      {
+    {
       vtkMRMLNode* node = d->currentScene()->GetNodeByID(nodeID.toLatin1());
       if (node)
-        {
+      {
         loadedNodes->AddItem(node);
-        }
       }
     }
+  }
   if (deleteDialog)
-   {
+  {
     delete dialog;
-    }
+  }
   return res;
 }
 

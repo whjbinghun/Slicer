@@ -32,6 +32,8 @@
 #include "vtkMRMLNode.h"
 #include "vtkNew.h"
 
+#include <QDebug>
+
 //-----------------------------------------------------------------------------
 qSlicerModelsDialogPrivate::qSlicerModelsDialogPrivate(qSlicerModelsDialog& object, QWidget* _parentWidget)
   : QDialog(_parentWidget)
@@ -122,6 +124,8 @@ qSlicerFileDialog::IOAction qSlicerModelsDialog::action()const
 //-----------------------------------------------------------------------------
 bool qSlicerModelsDialog::exec(const qSlicerIO::IOProperties& readerProperties)
 {
+  qDebug()<<"qSlicerModelsDialog::exec";
+
   Q_D(qSlicerModelsDialog);
   Q_ASSERT(!readerProperties.contains("fileName"));
 

@@ -1074,7 +1074,7 @@ QString qSlicerSaveDataDialogPrivate::sceneFileFormat()const
   return this->format(this->findSceneRow());
 }
 
-//-----------------------------------------------------------------------------
+//---准备保存--------------------------------------------------------------------------
 bool qSlicerSaveDataDialogPrivate::prepareForSaving()
 {
   QFileInfo file = this->sceneFile();
@@ -1406,6 +1406,8 @@ qSlicerFileDialog::IOAction qSlicerSaveDataDialog::action()const
 //-----------------------------------------------------------------------------
 bool qSlicerSaveDataDialog::exec(const qSlicerIO::IOProperties& readerProperties)
 {
+  qDebug()<<"qSlicerSaveDataDialog::exec"<<readerProperties;
+
   Q_D(qSlicerSaveDataDialog);
   Q_UNUSED(readerProperties);
   Q_ASSERT(!readerProperties.contains("fileName"));

@@ -570,6 +570,8 @@ void qSlicerDataDialog::dropEvent(QDropEvent *event)
 //-----------------------------------------------------------------------------
 bool qSlicerDataDialog::exec(const qSlicerIO::IOProperties& readerProperties)
 {
+  qDebug()<<"qSlicerDataDialog::exec";
+
   Q_D(qSlicerDataDialog);
   Q_ASSERT(!readerProperties.contains("fileName"));
   if (readerProperties.contains("fileNames"))

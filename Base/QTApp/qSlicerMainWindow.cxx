@@ -869,10 +869,10 @@ void qSlicerMainWindow::on_FileAddTransformAction_triggered()
   qSlicerApplication::application()->ioManager()->openAddTransformDialog();
 }
 
-//---------------------------------------------------------------------------
+//-----文件保存----------------------------------------------------------------------
 void qSlicerMainWindow::on_FileSaveSceneAction_triggered()
 {
-  qSlicerApplication::application()->ioManager()->openSaveDataDialog();
+  qSlicerApplication::application()->ioManager()->openSaveDataDialog();//打开保存数据对话框
 }
 
 //---------------------------------------------------------------------------

@@ -28,6 +28,10 @@
 /// Forward declarations
 class qSlicerSaveDataDialogPrivate;
 
+/**
+ * 保存数据对话框
+ */
+
 //------------------------------------------------------------------------------
 class Q_SLICER_BASE_QTGUI_EXPORT qSlicerSaveDataDialog : public qSlicerFileDialog
 {

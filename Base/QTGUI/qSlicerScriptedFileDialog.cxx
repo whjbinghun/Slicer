@@ -203,6 +203,8 @@ PyObject* qSlicerScriptedFileDialog::self() const
 //-----------------------------------------------------------------------------
 bool qSlicerScriptedFileDialog::exec(const qSlicerIO::IOProperties& ioProperties)
 {
+
+  qDebug()<<" qSlicerScriptedFileDialog::exec";
   Q_D(qSlicerScriptedFileDialog);
   d->Properties = ioProperties;
   PyObject * result = d->PythonCppAPI.callMethod(d->ExecMethod);
